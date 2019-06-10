@@ -1,0 +1,8 @@
+{
+  "vault": "backups",
+  "temp": "/tmp",
+  "home": "/var/atlassian/application-data/confluence",
+  "install":  "/opt/atlassian/confluence", 
+  "manifest": "/opt/uss/confluencbackup/manifest.json",
+  "retentionDays": 365
+}
