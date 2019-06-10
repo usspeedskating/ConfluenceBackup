@@ -3,7 +3,7 @@ Back up a standalone confluence server to AWS
 
 ## Overview
 
-Creates a daily backup of the confluence server. The backup is saved to S3 glacier for 365 days (configurable). The latest backup is overwritten to S3 daily.
+Creates a daily backup of the confluence server. Each backup is saved to S3 glacier for 365 days (configurable). The latest backup is overwritten to S3 daily.
 
 The glacier backup is meant to protect against accidental or malicious deletions. The S3 backup is meant for disaster recovery.
 
