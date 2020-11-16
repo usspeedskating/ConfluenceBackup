@@ -14,14 +14,14 @@ namespace USSConfluenceBackup
     static string[] BACKUP_FILES_INSTALL =
     {
       //"/conf/web.xml",
-      "/conf/server.xml",
-      "/confluence/WEB-INF/web.xml",
+      "conf/server.xml",
+      "confluence/WEB-INF/web.xml",
     };
 
     static string[] BACKUP_FILES_HOME =
     {
-      "/confluence.cfg.xml",
-      "/attachments",
+      "confluence.cfg.xml",
+      "attachments",
     };
 
     static void Main(string[] args)
@@ -40,6 +40,7 @@ namespace USSConfluenceBackup
       DeleteFile(tempDB);
       vault.Upload(tempBup, date);
       UploadToS3(tempBup, config.Bucket);
+      UploadToS3(vault.Manifest, config.Bucket);
       DeleteFile(tempBup);
       vault.DeleteOlderThan(date - config.RetentionPeriod);
     }
@@ -78,10 +79,11 @@ namespace USSConfluenceBackup
           FileName = "/bin/bash",
           Arguments = $"-c \"{command}\"",
           UseShellExecute = false,
-          RedirectStandardOutput = true,
+          //RedirectStandardOutput = true,
           CreateNoWindow = true
         }
       };
+
       process.Start();
       process.WaitForExit();
     }

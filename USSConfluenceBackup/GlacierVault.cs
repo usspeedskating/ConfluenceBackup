@@ -44,6 +44,9 @@ namespace USSConfluenceBackup
 
     private void Save()
     {
+      if (File.Exists(Manifest.FullName))
+        Manifest.Delete();
+
       using (var fs = Manifest.OpenWrite())
       using (var writer = new StreamWriter(fs))
       using (var json = new JsonTextWriter(writer))
@@ -57,7 +60,7 @@ namespace USSConfluenceBackup
 
     public void DeleteOlderThan(DateTime date)
     {
-      foreach (var archive in _archives.Where(x => x.BackupDate < date))
+      foreach (var archive in _archives.Where(x => x.BackupDate < date).ToList())
       {
         Console.WriteLine($"Deleting old backup file for {archive.BackupDate.ToShortDateString()}");
         Delete(archive);
