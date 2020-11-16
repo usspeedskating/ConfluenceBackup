@@ -28,7 +28,7 @@ namespace USSConfluenceBackup
     {
       var config = new Configuration(args.Length == 0 ? "config.json" : args[0]);
       var vault = new GlacierVault(config.Manifest, config.Vault);
-      var date = DateTime.Now.Date;
+      var date = DateTime.UtcNow;
 
 
       var tempDB = CreateTempFile(config.Temp, "confluence.db");
